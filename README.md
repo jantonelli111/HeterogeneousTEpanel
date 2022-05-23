@@ -125,7 +125,7 @@ head(zeroMat)
 
 So from the above image, we can see that the (1,3), (1,4), etc. elements of the precision matrix will be set to zero. Now that we have the inputs, we can run the main function:
 
-````
+```
 modelFit = HeterogeneousTEpanel(outcomes=outcomes,
                                                          treatments=treatments,
                                                          covariates=covariates,
@@ -145,6 +145,7 @@ One can visualize the results using the plotting functions. First, for marginal 
 ```
 PlotMarginalEffects(modelFit)
 ```
+
 ![Alt text](images/marginal.png)
 
 

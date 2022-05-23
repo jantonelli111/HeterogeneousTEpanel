@@ -127,15 +127,15 @@ So from the above image, we can see that the (1,3), (1,4), etc. elements of the 
 
 ```
 modelFit = HeterogeneousTEpanel(outcomes=outcomes,
-                                                         treatments=treatments,
-                                                         covariates=covariates,
-                                                         nTimesOut = 10,
-                                                         nScans = 5000, 
-                                                         nBurn=2000, 
-                                                         thin=6,
-                                                         zeroMat = zeroMat,
-                                                         smoothEffects = FALSE,
-                                                         newX=newX)
+                                treatments=treatments,
+                                covariates=covariates,
+                                nTimesOut = 10,
+                                nScans = 2500, 
+                                nBurn=500, 
+                                thin=4,
+                                zeroMat = zeroMat,
+                                smoothEffects = FALSE,
+                                newX=newX)
 ```
 
 nScans, nBurn, and thin are MCMC parameters governing how long we run our MCMC chains, and how many samples we keep. Here we are keeping every 6th sample after an initial burnin of 2000 samples. We recommend increasing the overall number of samples to roughly 50,000 for any final analyses, though our experience has been that this model converges within a few thousand iterations. Lastly, smoothEffects is an indicator of whether any temporal smoothing should be done of the treatment effects. 

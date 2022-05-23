@@ -123,4 +123,29 @@ head(zeroMat)
 
 ![Alt text](images/zeroMat.png)
 
+So from the above image, we can see that the (1,3), (1,4), etc. elements of the precision matrix will be set to zero. Now that we have the inputs, we can run the main function:
+
+````
+modelFit = HeterogeneousTEpanel(outcomes=outcomes,
+                                                         treatments=treatments,
+                                                         covariates=covariates,
+                                                         nTimesOut = 10,
+                                                         nScans = 5000, 
+                                                         nBurn=2000, 
+                                                         thin=6,
+                                                         zeroMat = zeroMat,
+                                                         smoothEffects = FALSE,
+                                                         newX=newX)
+```
+
+nScans, nBurn, and thin are MCMC parameters governing how long we run our MCMC chains, and how many samples we keep. Here we are keeping every 6th sample after an initial burnin of 2000 samples. We recommend increasing the overall number of samples to roughly 50,000 for any final analyses, though our experience has been that this model converges within a few thousand iterations. Lastly, smoothEffects is an indicator of whether any temporal smoothing should be done of the treatment effects. 
+
+One can visualize the results using the plotting functions. First, for marginal estimands ($\Delta)(q)$ in the manuscript) we have:
+
+```
+PlotMarginalEffects(modelFit)
+```
+![Alt text](images/marginal.png)
+
+
 

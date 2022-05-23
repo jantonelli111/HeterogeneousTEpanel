@@ -6,7 +6,7 @@ https://arxiv.org/pdf/2006.07681.pdf
 
 Please don't hesitate to contact Joseph Antonelli with any questions at jantonelli111@gmail.com. Please report any bugs if you encounter any as well!
 
-# How to install HeterogeneousTEpanel
+## How to install HeterogeneousTEpanel
 
 The first thing we need to do is install the library, which can be done using the following
 
@@ -16,7 +16,7 @@ install_github(repo = "jantonelli111/HeterogeneousTEpanel")
 library(HeterogeneousTEpanel)
 ```
 
-### Structure of the data
+## Highlighting the structure of the data with a simple example
 
 To illustrate the use of the R package, and the structure of the data that is required, we will simulate a running toy example. First, we can set the dimensions of the data, which in this case will include 70 subjects measured over 60 time points. We also generate 7 covariates. 
 
@@ -86,3 +86,41 @@ for (j in 2 : ncol(outcomes)) {
     as.numeric(mvtnorm::rmvnorm(1, sigma=cov_sigma))
 }
 ```
+
+## Using the main functions
+
+Now that we have the structure of the three key inputs, we can move forward with utilizing the software to estimate treatment effects. There are a couple of other optional inputs one might want to use within this function. The first is called newX and this is a set of new covariate values to estimate the treatment effect at. An example of newX is given below:
+
+```
+newX = data.frame(X1 = c(0,0),
+                   X2 = c(0,0),
+                   X3 = c(1,1),
+                   X4 = c(0.5,0.5),
+                   X5 = c(-1,-1),
+                   X6 = c(0,0),
+                   X7 = c(3,3),
+                   lag = c(1,2))
+newX
+```
+![Alt text](images/newX.png)
+
+Note that this should have the same structure and variable names as covariates. This should also have an additional column called lag, which refers to how many time points after treatment we are considering. In this example we are estimating the treatment effect at the same covariate values over two different time points.
+
+Another parameter is called zeroMat, which is a set of indices that should have zeroes in the inverse of the covariance matrix for the N individuals at each point in time. Note that one can set this parameter to NULL and no sparsity will be enforced, but this will lead to unstable results in settings with large N and small TT. In this example, we will set all indices of the precision matrix to be zero except for first order neighbors (observations whose indices are only 1 apart). 
+
+```
+zeroMat = matrix(c(1,1,2,2), nrow=2)
+for (i in 1 : (nrow(outcomes) - 1)) {
+  for (j in i : nrow(outcomes)) {
+    zeroMat = rbind(zeroMat, c(i,j))
+  }
+}
+
+w = which(abs(zeroMat[,1] - zeroMat[,2]) < 2)
+zeroMat = zeroMat[-w,]
+head(zeroMat)
+```
+
+![Alt text](images/zeroMat.png)
+
+

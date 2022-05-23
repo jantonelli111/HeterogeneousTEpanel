@@ -4,11 +4,7 @@
 #' @param treatments          An N by T matrix of binary indicators indicating treatment
 #'                            status for each unit at each point in time
 #' @param covariates          An N by Q data frame of covariate values for each unit
-#' @param nScans              The number of MCMC scans to run
-#' @param nBurn               The number of MCMC scans that will be dropped as a burn-in
-#' @param thin                This number represents how many iterations between each scan
-#'                            that is kept
-#' @param smoothEffects       Whether or not to smooth treatment effects over time
+#' @param nTimesOut           The number of time points at which to estimate treatment effects
 #' @param newX                An M by Q matrix of covariate values to estimate the 
 #'                            treatment effect at. The default is NULL.
 #' @param zeroMat             An optional matrix of indices of entries of the inverse
@@ -17,6 +13,11 @@
 #'                            not need to specify both the (i,j) and (j,i) elements
 #'                            as the solution is necessarily symmetric. For more details
 #'                            see the helpfile for glasso().
+#' @param smoothEffects       Whether or not to smooth treatment effects over time
+#' @param nScans              The number of MCMC scans to run
+#' @param nBurn               The number of MCMC scans that will be dropped as a burn-in
+#' @param thin                This number represents how many iterations between each scan
+#'                            that is kept
 #' @param priorA              First hyperprior for inverse gamma prior distribution
 #'                            on variance components for the time series state parameters.
 #'                            We don't recommend changing this parameter, but generally

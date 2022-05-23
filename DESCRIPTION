@@ -1,0 +1,26 @@
+Package: HeterogeneousTEpanel
+Type: Package
+Title: Estimating heterogeneous treatment effects from panel data with staggered adoption
+Version: 0.1.0
+Author: Joseph Antonelli
+Maintainer: Joseph Antonelli <jantonelli111@gmail.com>
+Description: We estimate the causal effect of a policy that has a staggered rollout of the policy. Both time-varying marginal effects and effects that vary by covariates are estimated.
+License: GPL (>= 2)
+LazyData: TRUE
+URL: https://github.com/jantonelli111/HeterogeneousTEpanel
+BugReports: https://github.com/jantonelli111/HeterogeneousTEpanel/issues
+RoxygenNote: 7.1.1
+Suggests:
+    ggplot2,
+    glmnet,
+    npreg,
+    knitr,
+    rmarkdown,
+    testthat
+VignetteBuilder: knitr
+Imports:
+    mvtnorm,
+    statmod,
+    truncnorm,
+    splines,
+    glasso

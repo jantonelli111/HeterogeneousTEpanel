@@ -140,7 +140,7 @@ modelFit = HeterogeneousTEpanel(outcomes=outcomes,
 
 nScans, nBurn, and thin are MCMC parameters governing how long we run our MCMC chains, and how many samples we keep. Here we are keeping every 6th sample after an initial burnin of 2000 samples. We recommend increasing the overall number of samples to roughly 50,000 for any final analyses, though our experience has been that this model converges within a few thousand iterations. Lastly, smoothEffects is an indicator of whether any temporal smoothing should be done of the treatment effects. 
 
-One can visualize the results using the plotting functions. First, for marginal estimands ($\Delta)(q)$ in the manuscript) we have:
+One can visualize the results using the plotting functions. First, for marginal estimands ($\Delta(q)$ in the manuscript) we have:
 
 ```
 PlotMarginalEffects(modelFit)
@@ -148,5 +148,31 @@ PlotMarginalEffects(modelFit)
 
 ![Alt text](images/marginal.png)
 
+We see that as expected, the treatment effect is larger at first, decreases over the first few time periods, and then flattens out at zero. We can also see the effect of covariates using
 
+```
+PlotHeterogeneousEffects(modelFit)
+```
+
+![Alt text](images/heterogeneous.png)
+
+The last few covariates, particularly the last one, have more pronounced impacts on the treatment effect, which is expected given the true $\beta$ vector that we simulated. 
+
+All of these results can be obtained manually from the output of the function. The function returns a list for both marginal and heterogeneous estimands, and these contain posterior means, standard deviations, and 95\% credible intervals. For instance, one can look at the exact $\Delta(q)$ values using
+
+```
+modelFit$Marginal$timeSpecific
+```
+
+![Alt text](images/marginalestimates.png)
+
+Or one can look at the estimated treatment effects for the covariate values given in newX by
+
+```
+modelFit$Heterogeneous$newX
+```
+
+![Alt text](images/newXestimates.png)
+
+We see that this individual has a very large treatment effect, which is caused by them having a value of $X_7=3$. 
 

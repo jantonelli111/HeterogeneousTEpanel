@@ -82,7 +82,7 @@ Now, we can create temporal dependence and dependence across units as follows:
 outcomes[,1] = meanMatrix[,1] + as.numeric(mvtnorm::rmvnorm(1, sigma=cov_sigma))
 
 for (j in 2 : ncol(outcomes)) {
-  outcomes[,j] = meanMatrix[,j] + Amat %*% (outcomes[,j-1] - meanMatrix[,j-1]) + 
+  outcomes[,j] = meanMatrix[,j] + diag(0.4, N) %*% (outcomes[,j-1] - meanMatrix[,j-1]) + 
     as.numeric(mvtnorm::rmvnorm(1, sigma=cov_sigma))
 }
 ```

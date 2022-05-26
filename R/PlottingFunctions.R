@@ -3,7 +3,7 @@
 #' @param modelFit            The result of a call to HeterogeneousTEpanel()                          
 #'          
 #'
-#' @return Estimates and 95% credible intervals for marginal estimands 
+#' @return Plot with estimates and 95% credible intervals for marginal estimands 
 #'         at each time point considered.
 #'
 #' @export
@@ -31,7 +31,7 @@ PlotMarginalEffects = function(modelFit) {
 #' @param modelFit            The result of a call to HeterogeneousTEpanel()                          
 #'          
 #'
-#' @return Estimates and 95% credible intervals for the effect of each
+#' @return Plots estimates and 95% credible intervals for the effect of each
 #'         covariate considered.
 #'
 #' @export

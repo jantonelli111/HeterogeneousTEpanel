@@ -31,7 +31,11 @@
 #' @importFrom glasso glasso
 #' @importFrom mvtnorm dmvnorm rmvnorm
 #' @importFrom splines ns
-#' @return Description
+#' @return Returns a list with three elements. The first element corresponds to marginal treatment
+#'         effects at all time points considered. It contains posterior means, standard deviations
+#'         and 95% credible intervals. The second element of the list provides the same information
+#'         but for heterogeneous causal effects. The third element contains the full posterior
+#'         distribution of the unit and time-specific causal effects. 
 #'
 #' @export
 
